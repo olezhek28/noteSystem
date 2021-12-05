@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package api.note_v1;
+
+option go_package = "github.com/olezhek28/noteSystem/pkg/note_v1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service NoteV1 {
+  rpc GetNotesList(google.protobuf.Empty) returns(GetNotesListResponse) {
+    option(google.api.http) = {
+      get: "/note/v1/list"
+    };
+  }
+}
+
+message GetNotesListResponse {
+  int64 id = 1;
+  string title = 2;
+  string description = 3;
+}
