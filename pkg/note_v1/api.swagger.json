@@ -36,7 +36,19 @@
   },
   "definitions": {
     "note_v1GetNotesListResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
     },
     "protobufAny": {
       "type": "object",

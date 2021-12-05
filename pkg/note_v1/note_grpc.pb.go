@@ -7,6 +7,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -18,7 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NoteV1Client interface {
-	GetNotesList(ctx context.Context, in *GetNotesListRequest, opts ...grpc.CallOption) (*GetNotesListResponse, error)
+	GetNotesList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetNotesListResponse, error)
 }
 
 type noteV1Client struct {
@@ -29,7 +30,7 @@ func NewNoteV1Client(cc grpc.ClientConnInterface) NoteV1Client {
 	return &noteV1Client{cc}
 }
 
-func (c *noteV1Client) GetNotesList(ctx context.Context, in *GetNotesListRequest, opts ...grpc.CallOption) (*GetNotesListResponse, error) {
+func (c *noteV1Client) GetNotesList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetNotesListResponse, error) {
 	out := new(GetNotesListResponse)
 	err := c.cc.Invoke(ctx, "/api.note_v1.NoteV1/GetNotesList", in, out, opts...)
 	if err != nil {
@@ -42,7 +43,7 @@ func (c *noteV1Client) GetNotesList(ctx context.Context, in *GetNotesListRequest
 // All implementations must embed UnimplementedNoteV1Server
 // for forward compatibility
 type NoteV1Server interface {
-	GetNotesList(context.Context, *GetNotesListRequest) (*GetNotesListResponse, error)
+	GetNotesList(context.Context, *emptypb.Empty) (*GetNotesListResponse, error)
 	mustEmbedUnimplementedNoteV1Server()
 }
 
@@ -50,7 +51,7 @@ type NoteV1Server interface {
 type UnimplementedNoteV1Server struct {
 }
 
-func (UnimplementedNoteV1Server) GetNotesList(context.Context, *GetNotesListRequest) (*GetNotesListResponse, error) {
+func (UnimplementedNoteV1Server) GetNotesList(context.Context, *emptypb.Empty) (*GetNotesListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNotesList not implemented")
 }
 func (UnimplementedNoteV1Server) mustEmbedUnimplementedNoteV1Server() {}
@@ -67,7 +68,7 @@ func RegisterNoteV1Server(s grpc.ServiceRegistrar, srv NoteV1Server) {
 }
 
 func _NoteV1_GetNotesList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetNotesListRequest)
+	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -79,7 +80,7 @@ func _NoteV1_GetNotesList_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: "/api.note_v1.NoteV1/GetNotesList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NoteV1Server).GetNotesList(ctx, req.(*GetNotesListRequest))
+		return srv.(NoteV1Server).GetNotesList(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
