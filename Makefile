@@ -12,11 +12,10 @@ PHONY: .generate
 				--grpc-gateway_opt=logtostderr=true \
 				--grpc-gateway_opt=paths=import \
 				--validate_out lang=go:pkg/note_v1 \
-				--swagger_out=allow_merge=true,merge_file_name=api:swagger \
+				--swagger_out=allow_merge=true,merge_file_name=api:pkg/note_v1 \
 				api/note_v1/note.proto
-		#mv pkg/ocp-note-api/github.com/ozoncp/ocp-note-api/pkg/ocp-note-api/* pkg/ocp-note-api/
-		#rm -rf pkg/ocp-note-api/github.com
-		#mkdir -p cmd/ocp-note-api
+		mv pkg/note_v1/github.com/olezhek28/noteSystem/pkg/note_v1/* pkg/note_v1/
+		rm -rf pkg/note_v1/github.com
 
 PHONY: vendor-proto
 vendor-proto: .vendor-proto
